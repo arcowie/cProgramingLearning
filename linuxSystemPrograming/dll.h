@@ -1,3 +1,6 @@
+#ifndef dll_h
+#define dll_h
+
 typedef struct dllNode{
     void *data;
     struct dllNode *right;
@@ -11,3 +14,4 @@ typedef struct dll{
 dllT * getNewDll();
 
 int addDataDll(dllT *dll, void *appData);
+#endif
