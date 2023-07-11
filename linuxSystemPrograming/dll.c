@@ -2,16 +2,17 @@
 #include <memory.h>
 #include <stdlib.h>
 
-dllT * getNewDll(){
+dllT * getNewDll(int sizeOfData){
     dllT *temp = malloc(sizeof(dllT));
     temp->head = NULL;
+    temp->sizeOfData=sizeOfData;
     return temp;
 }
 
 int addDataDll(dllT *dll, void *appData){
     dllNodeT *newNode = malloc(sizeof(dllNodeT));
-
-    newNode->data=appData;
+    newNode->data=malloc(dll->sizeOfData);
+    memcpy(newNode->data, appData, dll->sizeOfData);
 
     /*Only true if an empty list*/
     if(!dll->head){

@@ -9,9 +9,25 @@ typedef struct dllNode{
 
 typedef struct dll{
     dllNodeT *head;
+    int sizeOfData;
 } dllT;
 
-dllT * getNewDll();
+dllT * getNewDll(int sizeOfData);
 
+/*Adds a node to a Doubly Linked List*/
 int addDataDll(dllT *dll, void *appData);
+
+/*Removes a piece of data from the DLL.
+Returns 0 for success and -1 for failure*/
+int removeDataFromDll(dllT *dll, void *data);
+
+/*Check if DLL is empty.  Returns 0 if empty
+and -1 if not empty.*/
+int isDllEmpty(dllT *dll);
+
+/*Removes all nodes from a DLL but does not 
+free appln data*/
+void drainDll(dllT *dll);
+
+
 #endif
