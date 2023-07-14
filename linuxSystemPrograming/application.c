@@ -14,35 +14,35 @@ int printPerson(person *p){
     return 0;
 }
 
+int keyAgeMatch(void *app, void *key){
+    int appAge = ((person*)app)->age;
+    int key = *(int*)key;
+    if(appAge == key) return 0;
+    else return 1;
+}
+
 int main(int argc, char **argv){
-    dllT *list = getNewDll();
-    person one = {"Al", 45, 205};
-    person two = {"Sammi", 24, 144}; 
-    person three = {"Ebony", 12, 105 };
+    dllT *list = getNewDll(sizeof(person));
+    person one = {"Al", 45, 205}, two = {"Sammi", 24, 144}, three = {"Ebony", 12, 105 }, *result;
+    int searchKey=45;
     dllNodeT *head;
 
     addDataDll(list, &one);
     addDataDll(list, &two);
     addDataDll(list, &three);
-    if(!list->head){
+    regKeyMatch(list, keyAgeMatch);
+    
+    
+    result=searchByKey(list, &searchKey);
+    if(result==NULL){
+        printf("\nResult not found, exiting\n");
         return 1;
     }
-    else{
-        head = list->head;
-    }
+   
+    
+    printPerson((person *)result);
 
-    while(head){
-        if(head->right){
-            printPerson(head->data);
-            head=head->right;
-            //printf("\nIn if\n");
-        }
-        else{
-            printf("\n\nEnd of List\n");
-            head=head->right;
-        }
-    }
-    return 0;
-
+    
+    
 
 }
